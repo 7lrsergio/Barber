@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- ============================================
+       MARC KEVEN BARBER SHOP - Landing Page
+       ============================================
+       A simple, performance-first one-page site.
+       Files:
+         - index.html  (this file - structure)
+         - styles.css   (all the styling)
+         - script.js    (interactivity)
+       ============================================ -->
+
+  <meta charset="UTF-8" />
+  <!-- Makes the page look correct on mobile phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Page title shown in browser tab -->
+  <title>Marc Keven | Barber Shop</title>
+  <!-- Short description for search engines -->
+  <meta name="description" content="Marc Keven Barber Shop en Tlaxco. Encuentra tu estilo con nosotros." />
+
+  <!-- ====== PERFORMANCE: Preconnect to image hosts ======
+       This tells the browser to start connecting to these
+       servers early, so images load faster later. -->
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://images.pexels.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- ====== FONT ======
+       Inter - a clean, modern font that looks great
+       on screens. We load weights 300-800. -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ====== STYLESHEET ======
+       All our custom styles live in styles.css -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================
+       HEADER
+       ============================================
+       Fixed at the top of the page.
+       - Starts transparent over the hero image
+       - Turns dark when you scroll down
+       - Has the logo (scissors + text) on the left
+       - Desktop: navigation links on the right
+       - Mobile: hamburger menu button on the right
+       ============================================ -->
+  <header id="header" class="header">
+    <div class="header-inner">
+
+      <!-- LOGO: Scissors icon + brand name -->
+      <a href="#inicio" class="logo">
+        <!-- Scissors SVG icon (from Lucide icons) -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"/>
+          <path d="M8.12 8.12 12 12"/>
+          <path d="M20 4 8.12 15.88"/>
+          <circle cx="6" cy="18" r="3"/>
+          <path d="M14.8 14.8 20 20"/>
+        </svg>
+        <span>MARC KEVEN</span>
+      </a>
+
+      <!-- DESKTOP NAVIGATION (hidden on mobile via CSS) -->
+      <nav class="nav-desktop">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#galeria">Galería</a>
+        <a href="#ubicacion">Ubicación</a>
+      </nav>
+
+      <!-- HAMBURGER BUTTON (visible only on mobile) -->
+      <button id="menu-open-btn" class="hamburger-btn" aria-label="Abrir menú">
+        <!-- Three horizontal lines icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"/>
+          <line x1="4" x2="20" y1="6" y2="6"/>
+          <line x1="4" x2="20" y1="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ============================================
+       MOBILE MENU (slide-in overlay)
+       ============================================
+       Hidden by default. When the hamburger is
+       clicked, JavaScript adds the "open" class
+       which slides it in from the right.
+       ============================================ -->
+  <div id="mobile-menu" class="mobile-menu">
+
+    <!-- Dark overlay behind the menu -->
+    <div id="menu-overlay" class="menu-overlay"></div>
+
+    <!-- Menu panel that slides in -->
+    <div class="menu-panel">
+
+      <!-- Close button (X icon) -->
+      <button id="menu-close-btn" class="menu-close-btn" aria-label="Cerrar menú">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"/>
+          <path d="m6 6 12 12"/>
+        </svg>
+      </button>
+
+      <!-- Logo inside the menu -->
+      <div class="menu-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#C41E24">
+          <circle cx="6" cy="6" r="3"/>
+          <path d="M8.12 8.12 12 12"/>
+          <path d="M20 4 8.12 15.88"/>
+          <circle cx="6" cy="18" r="3"/>
+          <path d="M14.8 14.8 20 20"/>
+        </svg>
+        <span>MARC KEVEN</span>
+      </div>
+
+      <!-- Navigation links -->
+      <nav class="menu-nav">
+        <a href="#inicio" class="menu-link">Inicio</a>
+        <a href="#servicios" class="menu-link">Servicios</a>
+        <a href="#galeria" class="menu-link">Galería</a>
+        <a href="#ubicacion" class="menu-link">Ubicación</a>
+      </nav>
+
+      <!-- CTA button at the bottom of the menu -->
+      <a href="https://www.picktime.com/475c7343-5cfe-4fa8-8c99-a48424e9199c" target="_blank" rel="noopener noreferrer" class="menu-cta">
+        AGENDA TU CITA
+      </a>
+    </div>
+  </div>
+
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================
+       Full-screen section with:
+       - Background photo of a barber at work
+       - Dark overlay so text is readable
+       - Barber name, subtitle, tagline
+       - Two buttons: reservation + services
+       ============================================ -->
+  <section id="inicio" class="hero">
+
+    <!-- Background image (set via CSS for performance) -->
+    <div class="hero-bg" style="background-image: url('img/baberBackground.jpeg');"></div>
+
+    <!-- Dark gradient overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Text content centered on the hero -->
+    <div class="hero-content">
+      <!-- Small label -->
+      <p class="hero-subtitle fade-up delay-1">BARBER</p>
+      <!-- Big name -->
+      <h1 class="hero-title fade-up delay-2">Marc Keven</h1>
+      <!-- Tagline -->
+      <p class="hero-tagline fade-up delay-3">Encuentra tu estilo con nosotros</p>
+
+      <!-- Buttons -->
+      <div class="hero-buttons fade-up delay-4">
+        <!-- Primary: links to WhatsApp for reservations -->
+        <!-- CHANGE THIS LINK to your own booking URL -->
+        <a href="https://www.picktime.com/475c7343-5cfe-4fa8-8c99-a48424e9199c" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          Agenda tu cita
+        </a>
+        <!-- Secondary: scrolls down to services -->
+        <a href="#servicios" class="btn-secondary">
+          Nuestros servicios
+        </a>
+      </div>
+    </div>
+
+    <!-- Small bouncing arrow at the bottom -->
+    <a href="#servicios" class="scroll-indicator" aria-label="Ver más">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </a>
+  </section>
+
+
+  <!-- ============================================
+       SERVICES SECTION
+       ============================================
+       Shows the list of barber services.
+       Each card has: name, price, description, time.
+       
+       TO EDIT SERVICES:
+       Just change the text inside each card below.
+       Copy a card to add a new service.
+       Delete a card to remove a service.
+       ============================================ -->
+  <section id="servicios" class="services">
+    <div class="container">
+
+      <!-- Section title -->
+      <div class="section-header reveal">
+        <h2>Nuestros Servicios</h2>
+        <p class="section-subtitle">Calidad y estilo en cada corte</p>
+      </div>
+
+      <!-- Service cards -->
+      <div class="services-list">
+
+        <!-- SERVICE 1: Corte Standard -->
+        <div class="service-card reveal">
+          <div class="service-top">
+            <h3 class="service-name">Corte Standard</h3>
+            <span class="service-price">$120</span>
+          </div>
+          <p class="service-desc">
+            Corte clásico con acabado limpio y profesional.
+            <!-- Clock icon -->
+            <span class="service-time">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              30 min
+            </span>
+          </p>
+        </div>
+
+        <!-- SERVICE 2: Corte + Ceja -->
+        <div class="service-card reveal">
+          <div class="service-top">
+            <h3 class="service-name">Corte + Ceja</h3>
+            <span class="service-price">$150</span>
+          </div>
+          <p class="service-desc">
+            Corte clásico con diseño y linea de ceja.
+            <span class="service-time">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              35 min
+            </span>
+          </p>
+        </div>
+
+        <!-- SERVICE 3: Corte + Barba -->
+        <div class="service-card reveal">
+          <div class="service-top">
+            <h3 class="service-name">Corte + Barba</h3>
+            <span class="service-price">$180</span>
+          </div>
+          <p class="service-desc">
+            Corte completo con perfilado de barba.
+            <span class="service-time">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              45 min
+            </span>
+          </p>
+        </div>
+
+        <!-- SERVICE 4: Corte Completo -->
+        <div class="service-card reveal">
+          <div class="service-top">
+            <h3 class="service-name">Corte Completo</h3>
+            <span class="service-price">$200</span>
+          </div>
+          <p class="service-desc">
+            Corte, barba y ceja para un look total.
+            <span class="service-time">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              50 min
+            </span>
+          </p>
+        </div>
+
+      </div><!-- /services-list -->
+    </div><!-- /container -->
+  </section>
+
+
+  <!-- ============================================
+       GALLERY SECTION
+       ============================================
+       Shows 6 photos of barber work.
+       
+       PERFORMANCE NOTES:
+       - loading="lazy" = browser only loads images
+         when the user scrolls near them
+       - decoding="async" = browser decodes images
+         without blocking the page
+       - Images use small sizes (w=600) for speed
+       
+       TO CHANGE IMAGES:
+       Replace the src="..." with your own image URLs.
+       Keep the loading="lazy" for performance!
+       ============================================ -->
+  <section id="galeria" class="gallery">
+    <div class="container-wide">
+
+      <!-- Section title -->
+      <div class="section-header reveal">
+        <h2 class="text-white">Nuestro Trabajo</h2>
+        <p class="section-subtitle text-white-muted">Estilo y precisión en cada detalle</p>
+      </div>
+
+      <!-- Photo grid: 2 columns on mobile, 3 on desktop -->
+      <div class="gallery-grid">
+
+        <!-- PHOTO 1 -->
+        <div class="gallery-item reveal">
+          <img
+            src="img/example1.jpeg"
+            alt="Corte clásico en barbería"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <!-- PHOTO 2 -->
+        <div class="gallery-item reveal">
+          <img
+            src="img/example5.jpeg"
+            alt="Estilo moderno profesional"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <!-- PHOTO 3 -->
+        <div class="gallery-item reveal">
+          <img
+            src="img/example3.jpeg"
+            alt="Barbero trabajando con cliente"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <!-- PHOTO 4 -->
+        <div class="gallery-item reveal">
+          <img
+            src="img/example7.jpeg"
+            alt="Perfilado de barba"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <!-- PHOTO 5 -->
+        <div class="gallery-item reveal">
+          <img
+            src="img/example2.jpeg"
+            alt="Corte fade profesional"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <!-- PHOTO 6 -->
+        <div class="gallery-item reveal">
+          <img
+            src="img/example6.jpeg"
+            alt="Estilo moderno con barba"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+      </div><!-- /gallery-grid -->
+    </div><!-- /container-wide -->
+  </section>
+
+
+    <!-- ============================================
+       LOCATION SECTION
+       ============================================
+       Shows where the shop is:
+       - Embedded Google Map of Tlaxco
+       - Address and phone number
+       
+       TO CHANGE LOCATION:
+       Update the Google Maps iframe src URL.
+       Change the address and phone text below.
+       ============================================ -->
+  <section id="ubicacion" class="location">
+    <div class="container">
+
+      <!-- Section title -->
+      <div class="section-header reveal">
+        <h2>Nuestra Ubicación</h2>
+      </div>
+
+      <!-- Embedded Google Map (placeholder loaded via JS for Lite mode) -->
+      <div id="map-container"
+           class="map-container reveal"
+           data-src="https://maps.google.com/maps?q=Tlaxco+Tlaxcala+Mexico&t=&z=14&ie=UTF8&iwloc=&output=embed"
+           data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Mexico_Tlaxcala_Tlaxco_location_map.svg/640px-Mexico_Tlaxcala_Tlaxco_location_map.svg.png"
+           style="height:280px;">
+        <!-- The map iframe or static fallback image will be inserted here by script.js -->
+      </div>
+
+      <!-- Address and phone info -->
+      <div class="contact-info reveal">
+        <h3 class="contact-title">Visítanos</h3>
+
+        <!-- Address -->
+        <div class="contact-row">
+          <!-- Map pin icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-red">
+            <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <div>
+            <p class="contact-main">Tlaxco</p>
+            <p class="contact-sub">Nueva dirección Próximamente</p>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="contact-row">
+          <!-- Phone icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-red">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <!-- CHANGE THIS to your phone number -->
+          <a href="tel:+522411261253" class="contact-main contact-link">
+            Phone: (241) 126-1253
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /container -->
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================
+       Simple dark footer with logo and copyright.
+       CHANGE the copyright text below as needed.
+       ============================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <!-- Small logo -->
+      <div class="footer-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"/>
+          <path d="M8.12 8.12 12 12"/>
+          <path d="M20 4 8.12 15.88"/>
+          <circle cx="6" cy="18" r="3"/>
+          <path d="M14.8 14.8 20 20"/>
+        </svg>
+        <span>MARC KEVEN</span>
+      </div>
+      <!-- Copyright -->
+      <p class="footer-copy">&copy; 2025 SLANDS. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+  <!-- ====== JAVASCRIPT ======
+       All interactivity is in script.js.
+       Loaded at the end of body so the HTML
+       is already ready when the script runs. -->
+  <script src="script.js"></script>
+
+</body>
+</html>

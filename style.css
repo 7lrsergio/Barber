@@ -1,0 +1,932 @@
+/* ============================================
+   MARC KEVEN BARBER SHOP - Styles
+   ============================================
+   Organized by section. Mobile-first approach:
+   we write styles for mobile first, then add
+   @media queries for larger screens.
+
+   TABLE OF CONTENTS:
+   1. Reset & Base
+   2. Header
+   3. Mobile Menu
+   4. Hero Section
+   5. Services Section
+   6. Gallery Section
+   7. Location Section
+   8. Footer
+   9. Animations
+   10. Scrollbar & Selection
+   ============================================ */
+
+
+/* ============================================
+   1. RESET & BASE STYLES
+   ============================================
+   Remove browser defaults and set up the
+   foundation for our design.
+   ============================================ */
+
+/* Remove default margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Makes width include padding */
+}
+
+/* Smooth scrolling when clicking anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base body styles */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1e1919;              /* Dark brown-black for text */
+  background-color: #f7f5f2;   /* Warm off-white background */
+  line-height: 1.6;            /* Comfortable line spacing */
+  -webkit-font-smoothing: antialiased; /* Smoother fonts on Mac */
+  overflow-x: hidden;          /* Prevent horizontal scroll */
+}
+
+/* Remove link underlines globally */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make images responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* ============================================
+   2. HEADER
+   ============================================
+   Fixed at top. Transparent at first, then
+   turns dark when scrolling (via JavaScript
+   adding the "scrolled" class).
+   ============================================ */
+
+.header {
+  position: fixed;             /* Stays at top while scrolling */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;                /* On top of everything */
+  transition: background-color 0.5s ease,
+              border-color 0.5s ease;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+/* When the user scrolls, JS adds this class */
+.header.scrolled {
+  background-color: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(12px);   /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Inner container: logo on left, nav on right */
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;                /* Header height on mobile */
+}
+
+/* Logo: scissors icon + text */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.logo span {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.15em;      /* Wide letter spacing */
+}
+
+/* Desktop navigation links (hidden on mobile) */
+.nav-desktop {
+  display: none;               /* Hidden by default (mobile) */
+}
+
+.nav-desktop a {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+/* Hover: text turns white */
+.nav-desktop a:hover {
+  color: white;
+}
+
+/* Red underline on hover */
+.nav-desktop a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #C41E24;
+  transition: width 0.3s ease;
+}
+
+.nav-desktop a:hover::after {
+  width: 100%;
+}
+
+/* Hamburger button (mobile only) */
+.hamburger-btn {
+  display: flex;               /* Visible on mobile */
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.3s ease;
+}
+
+.hamburger-btn:hover {
+  color: white;
+}
+
+/* DESKTOP: Show nav links, hide hamburger */
+@media (min-width: 768px) {
+  .header-inner {
+    height: 80px;              /* Taller header on desktop */
+    padding: 0 32px;
+  }
+
+  .nav-desktop {
+    display: flex;             /* Show desktop nav */
+    align-items: center;
+    gap: 40px;
+  }
+
+  .hamburger-btn {
+    display: none;             /* Hide hamburger on desktop */
+  }
+
+  .logo span {
+    font-size: 18px;
+  }
+}
+
+
+/* ============================================
+   3. MOBILE MENU
+   ============================================
+   A slide-in panel from the right.
+   Hidden by default, shown when JS adds
+   the "open" class.
+   ============================================ */
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;                /* Above everything including header */
+  pointer-events: none;        /* Don't block clicks when hidden */
+  visibility: hidden;
+}
+
+/* When menu is open */
+.mobile-menu.open {
+  pointer-events: auto;        /* Allow clicks */
+  visibility: visible;
+}
+
+/* Dark semi-transparent overlay behind menu */
+.menu-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu.open .menu-overlay {
+  opacity: 1;
+}
+
+/* The actual menu panel sliding from right */
+.menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  background: #0a0a0a;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 64px 32px 40px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%); /* Start off-screen to the right */
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu.open .menu-panel {
+  transform: translateX(0);    /* Slide into view */
+}
+
+/* Close button */
+.menu-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.3s ease;
+}
+
+.menu-close-btn:hover {
+  color: white;
+}
+
+/* Logo inside mobile menu */
+.menu-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+
+.menu-logo span {
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.15em;
+}
+
+/* Navigation links in mobile menu */
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-link {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.3s ease;
+}
+
+.menu-link:hover {
+  color: white;
+}
+
+/* CTA button at the bottom of mobile menu */
+.menu-cta {
+  margin-top: auto;            /* Push to bottom */
+  display: block;
+  text-align: center;
+  padding: 14px;
+  background: #C41E24;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-cta:hover {
+  background: #a01920;
+}
+
+
+/* ============================================
+   4. HERO SECTION
+   ============================================
+   Full-screen intro with background photo.
+   ============================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;           /* Full screen height */
+  min-height: 100dvh;          /* Dynamic viewport (better on mobile) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background image layer */
+.hero-bg {
+  position: absolute;
+  inset: 0;                    /* Same as top/right/bottom/left: 0 */
+  background-size: cover;
+  background-position: start;
+  background-repeat: no-repeat;
+}
+
+/* Dark gradient overlay for text readability */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.50),        /* Lighter at top */
+    rgba(0, 0, 0, 0.65),        /* Medium in middle */
+    rgba(0, 0, 0, 0.80)         /* Darker at bottom */
+  );
+}
+
+/* Text content container */
+.hero-content {
+  position: relative;           /* Above the overlay */
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 540px;
+}
+
+/* "BARBER" small label */
+.hero-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+/* "Marc Keven" big title */
+.hero-title {
+  color: white;
+  font-size: 2.8rem;           /* ~45px */
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;     /* Slight tightening */
+}
+
+/* Tagline */
+.hero-tagline {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  margin-bottom: 40px;
+}
+
+/* Button container */
+.hero-buttons {
+  display: flex;
+  flex-direction: column;       /* Stack vertically on mobile */
+  gap: 12px;
+}
+
+/* Primary button: Red background */
+.btn-primary {
+  display: inline-block;
+  padding: 16px 32px;
+  background: #C41E24;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  border-radius: 9px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 8px 24px rgba(196, 30, 36, 0.2);
+}
+
+.btn-primary:hover {
+  background: #a8191e;
+}
+
+/* Secondary button: White outline */
+.btn-secondary {
+  display: inline-block;
+  padding: 16px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  border-radius: 9px;
+  text-align: center;
+  transition: background-color 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Bouncing scroll-down arrow at the bottom */
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.4);
+  animation: bounce 2s infinite;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.scroll-indicator:hover {
+  opacity: 0.7;
+}
+
+/* DESKTOP hero adjustments */
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 4.5rem;         /* Bigger title on desktop */
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .hero-tagline {
+    font-size: 18px;
+  }
+
+  .hero-buttons {
+    flex-direction: row;        /* Side by side on desktop */
+    justify-content: center;
+    gap: 16px;
+  }
+}
+
+
+/* ============================================
+   5. SERVICES SECTION
+   ============================================
+   Cream background, clean card layout.
+   ============================================ */
+
+/* Reusable container: max-width + centered */
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Wider container for gallery */
+.container-wide {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.services {
+  padding: 64px 0;             /* Vertical spacing */
+  background: #f7f5f2;         /* Warm cream color */
+}
+
+/* Section header (title + subtitle) */
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: #1e1919;
+}
+
+.section-subtitle {
+  color: #736c64;              /* Muted brown-gray */
+  font-size: 14px;
+}
+
+/* Vertical list of service cards */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual service card */
+.service-card {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e8e5e0;
+  padding: 20px;
+  position: relative;           /* For the red left-border effect */
+  transition: border-color 0.3s ease;
+}
+
+/* Red left-border accent on hover */
+.service-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: #C41E24;
+  border-radius: 8px 0 0 8px;
+  transition: width 0.3s ease;
+}
+
+.service-card:hover::before {
+  width: 3px;
+}
+
+.service-card:hover {
+  border-color: rgba(196, 30, 36, 0.15);
+}
+
+/* Top row of card: name on left, price on right */
+.service-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+/* Service name */
+.service-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e1919;
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-name {
+  color: #C41E24;              /* Red on hover */
+}
+
+/* Price */
+.service-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e1919;
+  flex-shrink: 0;              /* Don't squish the price */
+}
+
+/* Description text */
+.service-desc {
+  color: #736c64;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Duration badge (clock icon + time) */
+.service-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+}
+
+/* DESKTOP service adjustments */
+@media (min-width: 768px) {
+  .services {
+    padding: 96px 0;
+  }
+
+  .section-header {
+    margin-bottom: 64px;
+  }
+
+  .section-header h2 {
+    font-size: 36px;
+  }
+
+  .services-list {
+    gap: 16px;
+  }
+
+  .service-card {
+    padding: 24px;
+  }
+
+  .service-name,
+  .service-price {
+    font-size: 18px;
+  }
+
+  .service-desc {
+    font-size: 15px;
+  }
+}
+
+
+/* ============================================
+   6. GALLERY SECTION
+   ============================================
+   Dark background, photo grid.
+   2 columns on mobile, 3 on desktop.
+   ============================================ */
+
+.gallery {
+  padding: 64px 0;
+  background: #1e1919;         /* Dark background */
+}
+
+/* White text overrides for dark bg */
+.text-white {
+  color: white;
+}
+
+.text-white-muted {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Photo grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* 2 columns on mobile */
+  gap: 8px;
+}
+
+/* Each photo container */
+.gallery-item {
+  aspect-ratio: 3 / 4;         /* Portrait ratio for barber photos */
+  border-radius: 8px;
+  overflow: hidden;
+  background: #2a2424;         /* Dark placeholder while loading */
+}
+
+/* Photo itself */
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* Crop to fill, don't stretch */
+  /* GPU-accelerated hover zoom (performance-friendly) */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden; /* Prevents flicker during transform */
+}
+
+/* Subtle zoom on hover */
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* DESKTOP: 3 columns, more gap */
+@media (min-width: 768px) {
+  .gallery {
+    padding: 96px 0;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);  /* 3 columns */
+    gap: 12px;
+  }
+}
+
+
+/* ============================================
+   7. LOCATION SECTION
+   ============================================
+   White background, map + contact info.
+   ============================================ */
+
+.location {
+  padding: 64px 0;
+  background: white;
+}
+
+/* Map container with rounded corners */
+.map-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e5e0;
+  margin-bottom: 32px;
+}
+
+/* Contact info block */
+.contact-info {
+  /* no special layout needed */
+}
+
+.contact-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e1919;
+  margin-bottom: 20px;
+}
+
+/* Each contact row: icon + text */
+.contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+/* Red color for contact icons */
+.icon-red {
+  color: #C41E24;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Bold text (city, phone) */
+.contact-main {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1e1919;
+}
+
+/* Subtle text (address details) */
+.contact-sub {
+  color: #736c64;
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+/* Phone link hover */
+.contact-link {
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #C41E24;
+}
+
+/* DESKTOP location adjustments */
+@media (min-width: 768px) {
+  .location {
+    padding: 96px 0;
+  }
+
+  .map-container {
+    margin-bottom: 40px;
+  }
+
+  .contact-title {
+    font-size: 24px;
+  }
+}
+
+
+/* ============================================
+   8. FOOTER
+   ============================================
+   Dark background, minimal.
+   ============================================ */
+
+.footer {
+  background: #1e1919;
+  padding: 32px 20px;
+}
+
+.footer-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Footer logo */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 16px;
+}
+
+.footer-logo span {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+}
+
+/* Copyright text */
+.footer-copy {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 13px;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 40px 32px;
+  }
+}
+
+
+/* ============================================
+   9. ANIMATIONS
+   ============================================
+   - Fade-up entrance for hero elements
+   - Reveal animation for scroll sections
+   - Bounce for scroll indicator
+   All use GPU-friendly transforms for
+   best performance.
+   ============================================ */
+
+/* --- Hero fade-up entrance ---
+   Elements start invisible and slide up.
+   Delays create a cascading effect. */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Staggered delays for hero elements */
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Scroll reveal ---
+   Elements with .reveal class start hidden.
+   JavaScript adds .visible when they enter
+   the viewport. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Bounce animation for scroll arrow --- */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-8px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-4px);
+  }
+}
+
+
+/* ============================================
+   10. SCROLLBAR & SELECTION
+   ============================================
+   Small design touches that make the site
+   feel more polished.
+   ============================================ */
+
+/* Custom text selection color */
+::selection {
+  background: #C41E24;
+  color: white;
+}
+
+/* Custom scrollbar (WebKit browsers: Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1919;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3535;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C41E24;
+}
