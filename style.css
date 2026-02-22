@@ -219,7 +219,7 @@ img {
 .menu-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.2);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -368,18 +368,22 @@ img {
 /* "BARBER" small label */
 .hero-subtitle {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 12px;
+  font-size: 1.9rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
   margin-bottom: 20px;
-  font-weight: 300;
+  font-weight: 400;
+}
+
+.red{
+  color:#C41E24;
 }
 
 /* "Marc Keven" big title */
 .hero-title {
   color: white;
   font-size: 2.8rem;           /* ~45px */
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.05;
   margin-bottom: 20px;
   letter-spacing: -0.02em;     /* Slight tightening */
@@ -538,6 +542,7 @@ img {
   padding: 20px;
   position: relative;           /* For the red left-border effect */
   transition: border-color 0.3s ease;
+  height: 9rem;
 }
 
 /* Red left-border accent on hover */
@@ -636,6 +641,75 @@ img {
     font-size: 15px;
   }
 }
+
+
+.custom-btn {
+  display: grid;
+  bottom: 15px;
+  right: 15px;
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  /* padding: 10px 25px; */
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: fixed;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+/* 5 */
+.btn-5 {
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+  background: #C41E24;
+background: linear-gradient(0deg, #C41E24 0%, #C41E24 100%);
+align-self: flex-end;
+justify-self: flex-end;
+}
+.btn-5:hover {
+  color: #f0094a;
+  background: transparent;
+   box-shadow:none;
+}
+.btn-5:before,
+.btn-5:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #f0094a;
+  box-shadow:
+   -1px -1px 5px 0px #fff,
+   7px 7px 20px 0px #0003,
+   4px 4px 5px 0px #0002;
+  transition:400ms ease all;
+}
+.btn-5:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.btn-5:hover:before,
+.btn-5:hover:after{
+  width:100%;
+  animation-delay: 2s;
+  transition:.7s ease all;
+}
+
+
 
 
 /* ============================================
