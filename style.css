@@ -553,7 +553,7 @@ img {
   top: 0;
   bottom: 0;
   width: 0;
-  background: #C41E24;
+ 
   border-radius: 8px 0 0 8px;
   transition: width 0.3s ease;
 }

@@ -77,12 +77,15 @@ const CONFIG = {
      Paste your two n8n Production Webhook URLs here.
      Leave useMockData: true until both are live — the site
      runs fully on fake data so you can demo it today. */
-  webhooks: {
-    getAvailability: '',
-    bookAppointment: ''
-  },
-
-  useMockData: true,
+     webhooks: {
+      getAvailability:
+        'https://slopez11.app.n8n.cloud/webhook/barberia/availability',
+    
+      bookAppointment:
+        'https://slopez11.app.n8n.cloud/webhook/barberia/book'
+    },
+    
+    useMockData: false,
   requestTimeoutMs: 12000,
 
   /* ---- Apariencia del calendario ---- */
