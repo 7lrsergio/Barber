@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<title>Aparta tu cita — Barbería</title>
+<link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+<noscript><p class="shell">Activa JavaScript para consultar horarios y agendar tu cita.</p></noscript>
+
+<!-- Pantalla de carga mientras n8n consulta Outlook -->
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <div class="loader__pole"><div class="pole pole--spin"></div></div>
+  <p class="loader__text">Revisando la agenda</p>
+  <p class="loader__hint" id="loaderHint">Estamos consultando los horarios ocupados.</p>
+</div>
+
+<header class="masthead">
+  <div class="shell masthead__bar">
+    <p class="masthead__name" id="shopName">Barbería</p>
+    <span class="masthead__note">Paso 2 de 2</span>
+  </div>
+  <div class="pole"></div>
+</header>
+
+<main class="shell" id="main" hidden>
+  <h1 class="page-title">Aparta<br>tu cita</h1>
+
+  <button type="button" class="chip-service" id="chipService">
+    <span class="chip-service__label">Tipo de corte: <b id="chipName">—</b></span>
+    <span class="chip-service__swap">Cambiar</span>
+  </button>
+
+  <p class="calendar-help" id="calendarHelp"></p><p class="mode-note" id="modeNote" hidden></p>
+  <nav class="week-nav" id="weekNav" aria-label="Elige uno de los próximos siete días"></nav>
+  <div class="strip-wrap">
+    <div class="strip" id="strip" tabindex="0" role="region" aria-label="Disponibilidad de los próximos siete días"></div>
+  </div>
+
+  <div class="legend">
+    <span><i class="i-free"></i> Disponible</span>
+    <span><i class="i-busy"></i> Ocupado</span>
+  </div>
+
+  <section class="confirm" id="confirm" aria-live="polite">
+    <p class="confirm__empty" id="confirmEmpty">Toca un horario disponible para apartarlo.</p>
+  </section>
+</main>
+
+<!-- Confirmación final -->
+<main class="shell done" id="done" hidden>
+  <div class="pole" style="max-width:120px"></div>
+  <h1 class="done__title">¡Cita agendada!</h1>
+  <p class="done__body" id="doneBody"></p>
+  <a class="done__again" href="index.html">Agendar otra cita</a>
+</main>
+
+<script src="config.js?v=3"></script>
+<script src="time.js?v=3"></script>
+<script src="api.js?v=3"></script>
+<script src="page-agenda.js?v=3"></script>
+</body>
+</html>

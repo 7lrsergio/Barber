@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<title>Selecciona el corte — Barbería</title>
+<meta name="description" content="Agenda tu cita en línea. Elige el corte y aparta tu horario.">
+<link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+<noscript><p class="shell">Activa JavaScript para consultar horarios y agendar tu cita.</p></noscript>
+
+<header class="masthead">
+  <div class="shell masthead__bar">
+    <p class="masthead__name" id="shopName">Barbería</p>
+    <span class="masthead__note">Paso 1 de 2</span>
+  </div>
+  <div class="pole"></div>
+</header>
+
+<main class="shell services-page">
+  <h1 class="page-title">Selecciona<br>el corte</h1>
+  <p class="eyebrow">TU ESTILO. TU MOMENTO.</p><p class="page-sub">Un buen corte empieza aquí.<br>Elige tu servicio y encuentra tu horario.</p>
+
+  <div class="board" id="board" aria-label="Servicios disponibles"></div>
+
+  <p class="footnote" id="hours">Abierto de 11:00am a 7:00pm.</p>
+</main>
+
+<p class="shell mode-note" id="modeNote" hidden></p>
+<div class="curtain" id="curtain" aria-hidden="true"></div>
+
+<script src="config.js?v=3"></script>
+<script src="time.js?v=3"></script>
+<script src="api.js?v=3"></script>
+<script src="page-servicios.js?v=3"></script>
+</body>
+</html>
